@@ -1,6 +1,5 @@
 import VehicleModel, { IVehicle } from "../src/models/vehicle";
-import mongoose from "mongoose";
-
+//retain the original Model behaviour to allow directly construct instances
 jest.mock("mongoose", () => {
   const originalMongoose = jest.requireActual("mongoose");
   return {

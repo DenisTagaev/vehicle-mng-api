@@ -1,7 +1,7 @@
 import { connection } from "mongoose";
 import { app, server } from "../src"; 
 import { connectDB } from "../src/config/db";
-
+//Imitate real connection to the database to only test functionality
 jest.mock("../src/config/db", () => ({
   connectDB: jest.fn(),
 }));
