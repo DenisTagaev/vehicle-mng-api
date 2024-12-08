@@ -91,6 +91,22 @@ npm start
 ### 2. Retrieve All Vehicles
 **Endpoint**: `GET /api/vehicles`
 
+### 3. Edit a Vehicle
+**Endpoint**: `PUT /api/vehicles/:1`
+
+**Request Body:**
+```json
+{
+    "year": 2016,
+    "make": "Toyota",
+    "model": "Corolla",
+    "trim": "XSE"
+}
+```
+
+### 4. Delete a Vehicle
+**Endpoint**: `DELETE /api/vehicles/:1`
+
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
