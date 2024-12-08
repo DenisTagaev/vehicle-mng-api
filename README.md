@@ -44,7 +44,7 @@ Update the .env file with your MongoDB connection string and desired port:
 
 ```bash
 PORT=3000
-MONGO_URI=mongodb://localhost:27017/vehicles
+MONGO_URI=mongodb://<username>:<password>@localhost:27017
 ```
 
 ### 4. Run the Application

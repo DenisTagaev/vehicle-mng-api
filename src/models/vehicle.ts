@@ -7,7 +7,7 @@ export interface IVehicle {
     trim: string;
 }
 
-export interface IVehicleDocument extends IVehicle, Document {};
+export interface IVehicleDocument extends Document, IVehicle {};
 
 const VehicleSchema: Schema<IVehicleDocument> = new Schema({
   year: {
