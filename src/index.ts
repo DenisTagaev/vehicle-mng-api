@@ -1,18 +1,20 @@
-import express from "express";
+import express, { Express } from 'express';
 import dotenv from "dotenv";
 import { connectDB } from "./config/db";
 import vehicleRoutes from "./routes/index";
 
 dotenv.config();
-const app = express();
+const app:Express = express();
 
-const PORT = process.env.PORT ?? 3000;
+const PORT:string | 3000 = process.env.PORT ?? 3000;
 
 app.use(express.json());
 app.use("/api/vehicles", vehicleRoutes);
 
 connectDB();
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+export { app, server };

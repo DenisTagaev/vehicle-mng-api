@@ -2,11 +2,12 @@ import express from "express";
 import {
   getAllVehicles,
   createVehicle,
-} from "../controllers/index";
+} from "../controllers/vehicles";
 
 const router = express.Router();
 
-router.get("/", getAllVehicles);
-router.post("/", createVehicle);
+router.route("/")
+  .get(getAllVehicles)
+  .post(createVehicle);
 
 export default router;
