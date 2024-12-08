@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { connection } from "mongoose";
 import { app, server } from "../src"; 
 import { connectDB } from "../src/config/db";
 
@@ -14,7 +14,7 @@ describe("Server Initialization", () => {
 
   afterAll(async () => {
     // Ensuring the database connection is closed after tests
-    await mongoose.connection.close();
+    await connection.close();
     server.close();
   });
 

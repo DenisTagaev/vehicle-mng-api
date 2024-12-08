@@ -44,10 +44,32 @@ try {
 
     if (!updatedVehicle) {
       res.status(404).json({ error: "Vehicle doesn't exist" });
+      return;
     }
 
     res.status(200).json(updatedVehicle);
   } catch (error) {
+    console.error("Error updating vehicle:", error);
     res.status(500).json({ error: "Failed to update vehicle" });
   }
+}
+
+export const deleteVehicle = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+try {
+
+    const deletedVehicle = await Vehicle.findByIdAndDelete(req.params.id);
+
+    if (!deletedVehicle) {
+      res.status(404).json({ error: "Vehicle doesn't exist" });
+      return;
+    }
+
+    res.status(200).json(deletedVehicle);
+    } catch (error) {
+      console.error("Error deleting vehicle:", error);
+      res.status(500).json({ error: "Failed to delete vehicle" });
+    } 
 }
