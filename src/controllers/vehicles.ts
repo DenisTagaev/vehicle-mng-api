@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Vehicle from "../models/vehicle";
 import mongoose from "mongoose";
+import mongoSanitize from "express-mongo-sanitize";
 
 export const getAllVehicles = async (
   req: Request,
@@ -19,13 +20,14 @@ export const createVehicle = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { year, make, model, trim } = req.body;
+    const sanitizedBody = mongoSanitize.sanitize(req.body);
+    const { year, make, model, trim } = sanitizedBody;
 
     const newVehicle = new Vehicle({
       year,
-      make,
-      model,
-      trim,
+      make: make.trim(),
+      model: model.trim(),
+      trim: trim.trim(),
     });
 
     const savedVehicle = await newVehicle.save();
@@ -44,8 +46,9 @@ try {
       res.status(400).json({ error: "Invalid vehicle ID" });
       return; 
     }
-    
-    const updatedVehicle = await Vehicle.findByIdAndUpdate(req.params.id, { ...req.body}, { new: true });
+
+    const sanitizedBody = mongoSanitize.sanitize(req.body);
+    const updatedVehicle = await Vehicle.findByIdAndUpdate(req.params.id, { ...sanitizedBody}, { new: true });
 
     if (!updatedVehicle) {
       res.status(404).json({ error: "Vehicle doesn't exist" });
@@ -68,7 +71,7 @@ try {
       res.status(400).json({ error: "Invalid vehicle ID" });
       return;
     }
-    
+
     const deletedVehicle = await Vehicle.findByIdAndDelete(req.params.id);
 
     if (!deletedVehicle) {
