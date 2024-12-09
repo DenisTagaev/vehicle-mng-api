@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { editVehicle } from "../src/controllers/vehicles";
 import Vehicle from "../src/models/vehicle";
-
+//mock the behaviour of the query without connecting to the actual db
 jest.mock("../src/models/vehicle", () => {
   const mockModel = {
     findByIdAndUpdate: jest.fn(),
