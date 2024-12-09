@@ -92,7 +92,8 @@ npm start
 **Endpoint**: `GET /api/vehicles`
 
 ### 3. Edit a Vehicle
-**Endpoint**: `PUT /api/vehicles/:1`
+**Endpoint**: `PUT /api/vehicles/111111111111111111111111`
+*Please note, Mongoose will only accept 24 characters value for a valid ID*
 
 **Request Body:**
 ```json
@@ -105,7 +106,8 @@ npm start
 ```
 
 ### 4. Delete a Vehicle
-**Endpoint**: `DELETE /api/vehicles/:1`
+**Endpoint**: `DELETE /api/vehicles/111111111111111111111111`
+*Please note, Mongoose will only accept 24 characters value for a valid ID*
 
 ## Contributing
 

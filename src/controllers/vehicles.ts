@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Vehicle from "../models/vehicle";
+import mongoose from "mongoose";
 
 export const getAllVehicles = async (
   req: Request,
@@ -39,7 +40,11 @@ export const editVehicle = async (
   res: Response
 ): Promise<void> => {
 try {
-
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({ error: "Invalid vehicle ID" });
+      return; 
+    }
+    
     const updatedVehicle = await Vehicle.findByIdAndUpdate(req.params.id, { ...req.body}, { new: true });
 
     if (!updatedVehicle) {
@@ -59,7 +64,11 @@ export const deleteVehicle = async (
   res: Response
 ): Promise<void> => {
 try {
-
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({ error: "Invalid vehicle ID" });
+      return;
+    }
+    
     const deletedVehicle = await Vehicle.findByIdAndDelete(req.params.id);
 
     if (!deletedVehicle) {

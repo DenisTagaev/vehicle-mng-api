@@ -20,7 +20,7 @@ describe("editVehicle", () => {
     statusMock = jest.fn().mockReturnValue({ json: jsonMock });
 
     req = {
-      params: { id: "testID" },
+      params: { id: "111111111111111111111111" },
       body: {
         make: "Updated Make",
         model: "Updated Model",
@@ -38,9 +38,21 @@ describe("editVehicle", () => {
     jest.clearAllMocks();
   });
 
+    it("should return 400 if ID is invalid", async () => {
+    // Invalid ID to trigger the validation
+    req.params = { id:"invalid-id" };
+
+    await editVehicle(req as Request, res as Response);
+
+    expect(statusMock).toHaveBeenCalledWith(400);
+    expect(jsonMock).toHaveBeenCalledWith({
+        error: "Invalid vehicle ID",
+    });
+    });
+
   it("should update a vehicle and return the updated vehicle", async () => {
     const updatedVehicle = {
-      _id: "testID",
+      _id: "111111111111111111111111",
       make: "Updated Make",
       model: "Updated Model",
       year: 2024,
@@ -52,7 +64,7 @@ describe("editVehicle", () => {
     await editVehicle(req as Request, res as Response);
 
     expect(Vehicle.findByIdAndUpdate).toHaveBeenCalledWith(
-      "testID",
+      "111111111111111111111111",
       {
         make: "Updated Make",
         model: "Updated Model",
@@ -72,7 +84,7 @@ describe("editVehicle", () => {
     await editVehicle(req as Request, res as Response);
 
     expect(Vehicle.findByIdAndUpdate).toHaveBeenCalledWith(
-      "testID",
+      "111111111111111111111111",
       {
         make: "Updated Make",
         model: "Updated Model",
@@ -93,7 +105,7 @@ describe("editVehicle", () => {
     await editVehicle(req as Request, res as Response);
 
     expect(Vehicle.findByIdAndUpdate).toHaveBeenCalledWith(
-      "testID",
+      "111111111111111111111111",
       {
         make: "Updated Make",
         model: "Updated Model",
